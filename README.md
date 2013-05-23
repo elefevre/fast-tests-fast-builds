@@ -23,6 +23,22 @@ Run your build in parallel
 
 Maven and, I assume, many other build frameworks, allow for builds to be run in parallel. This is very handy. However, it requires that your tests may be run in parallel themselves. As it happens, it is probably a good idea to have tests that are independent enough to run in parallel, so this is putting the right kind of pressure on your development practices.
 
+
+Stub some services in integration tests
+---------------------------------------
+
+Depending on what is being testing, it might judicious to replace some services in your integration tests with stubs. Good examples include access to external servers.
+
+
+Replace servers with memory-based implementations
+-------------------------------------------------
+
+Some of the slowest pieces of your system are probably servers. Leaving your process to access another one is frequently very costly.
+
+Consider replacing servers with implementations that can be started from your tests. That means a startup time less than one second and a memory-based implementation.
+
+Good examples include HSQLDB or H2 in place of a regular database, and SubEtha SMTP in place of a mail server.
+
 Stuff to work on:
 -----------------
 
@@ -35,10 +51,8 @@ Stuff to work on:
 * avoid integration test frameworks such as Fitnesse and Cucumber
 * test HTML pages, AJAX calls instead of testing via the interface
 * avoid any I/O with the system (hd, network)
-* h2
 * Jetty
 * Apache VFS, Spring Resource, JBoss VFS, NIO 2 (?)
-* SubEtha SMTP
 * be on the look out for new, faster frameworks
 * be a constant gardener
 * do not test everything
