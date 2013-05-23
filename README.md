@@ -18,6 +18,11 @@ It does seem that faster processors and more RAM makes a difference (again, up t
 Some OSes have quirks that are worth watching for. For example, when we noticed rather unpredictable build times under Linux, it turned out that the system process that was generating random numbers could be very slow in some circumstances (you can change this behavior, though, see XXXXXXXXXXXXXXXXX).
 
 
+Run your build in parallel
+--------------------------
+
+Maven and, I assume, many other build frameworks, allow for builds to be run in parallel. This is very handy. However, it requires that your tests may be run in parallel themselves. As it happens, it is probably a good idea to have tests that are independent enough to run in parallel, so this is putting the right kind of pressure on your development practices.
+
 Stuff to work on:
 -----------------
 
@@ -37,5 +42,5 @@ Stuff to work on:
 * be on the look out for new, faster frameworks
 * be a constant gardener
 * do not test everything
-* run your build in parallel
 * upgrade your system
+* builds become slow one test at a time
