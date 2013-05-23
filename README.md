@@ -52,6 +52,14 @@ A good idea is to work as much as possible in a virtual file system, that is one
 Many implementations are available on the JVM. The latest versions of NIO 2 in Java 7 (XXXXXX check this XXXXXX) support this. For older versions of the JDK, consider using Apache VFS, Spring Resource, or JBoss VFS.
 
 
+Be on the outlook out for new, faster tools
+-------------------------------------------
+
+Are you using the fastest implementation of this particular API? How do you know?
+You need to keep an eye open for new libraries. Spend a few man-days every months to try them out with your project. Most will not meet your needs, but some will, and might make your code a little bit faster.
+
+This is not limited to libraries. Check out HTTP servers (Jetty will be faster than Tomcat in your tests, and might even be enough in production). Check out outlandish things such as Play! Framework.
+
 Stuff to work on:
 -----------------
 
@@ -63,8 +71,6 @@ Stuff to work on:
 * avoid GUI-based test tools
 * avoid integration test frameworks such as Fitnesse and Cucumber
 * test HTML pages, AJAX calls instead of testing via the interface
-* Jetty
-* be on the look out for new, faster frameworks
 * be a constant gardener
 * do not test everything
 * upgrade your system
