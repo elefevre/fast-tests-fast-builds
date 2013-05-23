@@ -39,6 +39,19 @@ Consider replacing servers with implementations that can be started from your te
 
 Good examples include HSQLDB or H2 in place of a regular database, and SubEtha SMTP in place of a mail server.
 
+You'll keep one or two tests that do interact with your target database. However, most, if not all, of your tests will work just as well with a memory-based db. As a bonus, you will want to write dialect-agnostic SQL, which will help you switch vendors in the future, should the need arise.
+
+
+Avoid interacting with the hard drive
+-------------------------------------
+
+Manipulating files usually means that the system must create a handle to a file, monitor access to it, and release the handle when done. This is costly and can also behave strangely when things go wrong (Windows is rather bad at releasing file handles when the build crashes).
+
+A good idea is to work as much as possible in a virtual file system, that is one that remains entirely in memory. In most cases, you will be able to create whole (albeit limited) file systems in memory, for each test, for a very low cost.
+
+Many implementations are available on the JVM. The latest versions of NIO 2 in Java 7 (XXXXXX check this XXXXXX) support this. For older versions of the JDK, consider using Apache VFS, Spring Resource, or JBoss VFS.
+
+
 Stuff to work on:
 -----------------
 
@@ -50,9 +63,7 @@ Stuff to work on:
 * avoid GUI-based test tools
 * avoid integration test frameworks such as Fitnesse and Cucumber
 * test HTML pages, AJAX calls instead of testing via the interface
-* avoid any I/O with the system (hd, network)
 * Jetty
-* Apache VFS, Spring Resource, JBoss VFS, NIO 2 (?)
 * be on the look out for new, faster frameworks
 * be a constant gardener
 * do not test everything
