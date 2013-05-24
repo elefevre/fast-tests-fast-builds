@@ -99,10 +99,19 @@ This is essentially what Cucumber leads you to do. The crucial different is that
 And if you need to show this test to your functional experts, they should be able to understand it at a glance.
 
 
+Refactor functional tests into unit tests
+-----------------------------------------
+
+I've come to realize that functional tests are often the first thing we tend to write when we do not understand the details of what it being tested. User logging fails? Write a functional test. The data retrieved from the database are not the same as those passed originally? Write a functional test.
+
+The problem is that, over time, you end up with many functional tests that have few differences. Look for those differences. They are often things that can easily be moved into unit tests on a lower layer.
+
+Eventually, you should end up with one or two functional tests that check the "happy path". Exceptional cases will be tests mostly with small, fast unit tests.
+
+
 Stuff to work on:
 -----------------
 
-* functional tests -> unit tests
 * remove underused features
 * do not implement features that seem slow to test
 * test HTML pages, AJAX calls instead of testing via the interface
