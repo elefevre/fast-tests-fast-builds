@@ -17,6 +17,8 @@ It does seem that faster processors and more RAM makes a difference (again, up t
 
 Some OSes have quirks that are worth watching for. For example, when we noticed rather unpredictable build times under Linux, it turned out that the system process that was generating random numbers could be very slow in some circumstances (you can change this behavior, though, see XXXXXXXXXXXXXXXXX).
 
+And of course, if you can upgrade your system, do so. That will save precious seconds many, many times a day, for little effort.
+
 
 Run your build in parallel
 --------------------------
@@ -58,14 +60,14 @@ Be on the outlook out for new, faster tools
 Are you using the fastest implementation of this particular API? How do you know?
 You need to keep an eye open for new libraries. Spend a few man-days every months to try them out with your project. Most will not meet your needs, but some will, and might make your code a little bit faster.
 
-This is not limited to libraries. Check out HTTP servers (Jetty will be faster than Tomcat in your tests, and might even be enough in production). Check out outlandish things such as Play! Framework.
+This is not limited to libraries. Check out HTTP servers (Jetty will be faster than Tomcat in your tests, and might even be enough in production). Check out outlandish things such as Play! Framework. Is it good enough? Is it faster?
+
 
 Stuff to work on:
 -----------------
 
 * functional tests -> unit tests
 * remove features from the graphical interface
-* mock your services in your integration tests
 * remove underused features
 * do not implement features that seem slow to test
 * avoid GUI-based test tools
@@ -73,5 +75,4 @@ Stuff to work on:
 * test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
 * do not test everything
-* upgrade your system
 * builds become slow one test at a time
