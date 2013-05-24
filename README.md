@@ -63,14 +63,19 @@ You need to keep an eye open for new libraries. Spend a few man-days every month
 This is not limited to libraries. Check out HTTP servers (Jetty will be faster than Tomcat in your tests, and might even be enough in production). Check out outlandish things such as Play! Framework. Is it good enough? Is it faster?
 
 
+Move behavior away from the graphical interface
+-----------------------------------------------
+
+Testing automatically through the UI is difficult, slow, and hard to maintain. When you feel the need to test a feature through the UI, always put significant effort into moving it to a layer below. In last resort, move this behavior to a separate module that can be tested separately from the UI (plus, JavaScript test frameworks are now pretty good).
+
+This will also allow you to mostly bypass UI-based test tools themselves. In truth, your production UI code is not the only slow piece in this chain. UI test frameworks often require to be run in cleanly separated environment, often in a combinaison of various environments (I was once introduced to a company that had to maintain dozens of servers solely for testing their interface in parallel; their build would only run on those servers and still take an hour or two). Only introduce them after exhausting all other options. And even then, do all you can to remove them.
+
 Stuff to work on:
 -----------------
 
 * functional tests -> unit tests
-* remove features from the graphical interface
 * remove underused features
 * do not implement features that seem slow to test
-* avoid GUI-based test tools
 * avoid integration test frameworks such as Fitnesse and Cucumber
 * test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
