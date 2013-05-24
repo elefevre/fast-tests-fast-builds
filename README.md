@@ -70,13 +70,41 @@ Testing automatically through the UI is difficult, slow, and hard to maintain. W
 
 This will also allow you to mostly bypass UI-based test tools themselves. In truth, your production UI code is not the only slow piece in this chain. UI test frameworks often require to be run in cleanly separated environment, often in a combinaison of various environments (I was once introduced to a company that had to maintain dozens of servers solely for testing their interface in parallel; their build would only run on those servers and still take an hour or two). Only introduce them after exhausting all other options. And even then, do all you can to remove them.
 
+
+Avoid integration test frameworks
+---------------------------------
+
+Integration test frameworks such as Fitnesse and Cucumber add a significant layer of complexity. That is, before testing your actual code, some time will be spent just starting their environment, inclusing parsing the tests written in their specific idiom.
+
+By all account, they are rather fast at this job. The problem is that, multiplied by the number of tests that tend to be written (you don't use them for just a couple of use cases, right?), it adds significant overhead.
+
+The point of those frameworks is that they help in communicating with functional experts. Is this how they are used at your company? Also, consider whether there are alternatives that would give you the same benefits (XXXXXX link to James Shore's article on FIT XXXXX).
+
+Some developers like Fitnesse and Cucumber because they guide them into writing test that clearly expose the business cases that have been implemented. I'd argue that those goals are achievable by basing your functional tests solely on your usualunit test framework. Careful wording of your test methods and clear presentation of the code within the tests can go a long way towards that goal:
+
+	@Test
+	public void users_can_log_into_the_system() {
+		createUser("john").withPassword("mypassword").inDatabase();
+
+		givenUserHasOpenedPage("index");
+
+		whenEntering(username("john"), password("mypassword"))//
+			.andPressingButton("Login");
+
+		thenTheResultingPageShouldContain("Welcome back, John!");
+	}
+
+This is essentially what Cucumber leads you to do. The crucial different is that it is run using JUnit, very quickly. As a bonus, it becomes trivial to run and debug from your usual IDE.
+
+And if you need to show this test to your functional experts, they should be able to understand it at a glance.
+
+
 Stuff to work on:
 -----------------
 
 * functional tests -> unit tests
 * remove underused features
 * do not implement features that seem slow to test
-* avoid integration test frameworks such as Fitnesse and Cucumber
 * test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
 * do not test everything
