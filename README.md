@@ -139,8 +139,15 @@ There is, in fact, a case for bypassing tests altogether in some specific situat
 Do be very careful of snap judgements, though.
 
 
+Be a constant gardener
+----------------------
+
+In the end, builds become slow one test at a time. The first time you write and run an integration test, it will only add a few seconds to your overall build time. The problem arises once you have many slow tests.
+
+You need to constantly keep an eye open for tests that take longer than others. Not just the very slow ones (you have already tackled those, right?), but the whole category of slow tests. Create a culture where team members always try to move UI-level tests to Integration-level. Integration-level Tests to Unit-level. And keep an eye open for faster alternatives.
+
+
 Stuff to work on:
 -----------------
 
-* be a constant gardener
-* builds become slow one test at a time
+* commonize the start/end of HTTP server
