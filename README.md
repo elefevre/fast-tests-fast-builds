@@ -109,10 +109,21 @@ The problem is that, over time, you end up with many functional tests that have 
 Eventually, you should end up with one or two functional tests that check the "happy path". Exceptional cases will be tests mostly with small, fast unit tests.
 
 
+Remove underused features
+-------------------------
+
+Features that a little used become moldy. Nobody requests new things about them, so it is not worth refactoring them and upgrading them to the latest, fanciest libraries.
+
+Still, they are _there_. They make your code harder to comprehend. They make the rest of the code harder to refactor. And they make your build slower.
+
+Spend some energy into checking what features are used the least. Some teams use fancy monitoring systems and gather statistics on what is being used the most. Failing that, simply check your HTTP stats, or what feature has the least request for bug fixes (a feature that does not have bug requests might be dead -- users who care the most complain a lot).
+
+And if it makes business sense, dump the thing.
+
+
 Stuff to work on:
 -----------------
 
-* remove underused features
 * do not implement features that seem slow to test
 * test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
