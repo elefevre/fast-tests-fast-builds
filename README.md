@@ -66,7 +66,7 @@ This is not limited to libraries. Check out HTTP servers (Jetty will be faster t
 Move behavior away from the graphical interface
 -----------------------------------------------
 
-Testing automatically through the UI is difficult, slow, and hard to maintain. When you feel the need to test a feature through the UI, always put significant effort into moving it to a layer below. In last resort, move this behavior to a separate module that can be tested separately from the UI (plus, JavaScript test frameworks are now pretty good).
+Testing automatically through the UI is difficult, slow, and hard to maintain. When you feel the need to test a feature through the UI, always put significant effort into moving it to a layer below. In last resort, move this behavior to a separate module that can be tested separately from the UI. Nowadays, JavaScript test frameworks are pretty good and plain HTML pages and AJAX calls are easy to test outside the browser.
 
 This will also allow you to mostly bypass UI-based test tools themselves. In truth, your production UI code is not the only slow piece in this chain. UI test frameworks often require to be run in cleanly separated environment, often in a combinaison of various environments (I was once introduced to a company that had to maintain dozens of servers solely for testing their interface in parallel; their build would only run on those servers and still take an hour or two). Only introduce them after exhausting all other options. And even then, do all you can to remove them.
 
@@ -129,10 +129,18 @@ You will occasionally be requested to implement features that would put a heavy 
 Such features should be seen with a critical eye by the technical team. When possible, suggest alternatives. Offer to start with a fast, simple implementation. When not, it might be a sign that it should be postponed for a while (in that case, consider paying for options so that you will be more informed when decision time arrives).
 
 
+Do not test everything (advanced users only)
+--------------------------------------------
+
+Sometimes, you need to face reality and accept that not everything will be tested. If enough business knowledge has been moved from the UI to the technical layers, is it still necessary to test the UI? If developers use the UI constantly to verify what they do, is it necessary to test it?
+
+There is, in fact, a case for bypassing tests altogether in some specific situations (see [It’s not about the unit tests](http://agilewarrior.wordpress.com/2012/10/06/its-not-about-the-unit-tests/)). If the part you are testing is simple enough, if the people involved care enough, then tests might have little benefits for you.
+
+Do be very careful of snap judgements, though.
+
+
 Stuff to work on:
 -----------------
 
-* test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
-* do not test everything
 * builds become slow one test at a time
