@@ -121,10 +121,17 @@ Spend some energy into checking what features are used the least. Some teams use
 And if it makes business sense, dump the thing.
 
 
+Refrain from implementing slow features
+---------------------------------------
+
+You will occasionally be requested to implement features that would put a heavy burden on your build system or on your tests. Examples include selecting a framework such as GWT, implementing business logic through the UI, writing exhaustive logs, etc.
+
+Such features should be seen with a critical eye by the technical team. When possible, suggest alternatives. Offer to start with a fast, simple implementation. When not, it might be a sign that it should be postponed for a while (in that case, consider paying for options so that you will be more informed when decision time arrives).
+
+
 Stuff to work on:
 -----------------
 
-* do not implement features that seem slow to test
 * test HTML pages, AJAX calls instead of testing via the interface
 * be a constant gardener
 * do not test everything
