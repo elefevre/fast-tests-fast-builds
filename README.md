@@ -31,6 +31,8 @@ Stub some services in integration tests
 
 Depending on what is being testing, it might judicious to replace some services in your integration tests with stubs. Good examples include access to external servers.
 
+Mock libraries sometimes help in this, although simply providing a local implementation of those services is sometimes the simplest option.
+
 
 Replace servers with memory-based implementations
 -------------------------------------------------
@@ -42,6 +44,14 @@ Consider replacing servers with implementations that can be started from your te
 Good examples include HSQLDB or H2 in place of a regular database, and SubEtha SMTP in place of a mail server.
 
 You'll keep one or two tests that do interact with your target database. However, most, if not all, of your tests will work just as well with a memory-based db. As a bonus, you will want to write dialect-agnostic SQL, which will help you switch vendors in the future, should the need arise.
+
+
+Start test servers only once
+----------------------------
+
+Even fast test servers can take longer to start than you are willing to bear. By carefully designing your tests, it should be possibly to start them only once for your entire test suite, while still automatically ensuring that the context is cleaned up automatically before production code is being exercized.
+
+A common way of doing that is by starting an HTTP server in a pre-test phase in Maven. I'd recommend starting the server from within your tests, which will make it much easier to run them outside Maven.
 
 
 Avoid interacting with the hard drive
@@ -145,9 +155,3 @@ Be a constant gardener
 In the end, builds become slow one test at a time. The first time you write and run an integration test, it will only add a few seconds to your overall build time. The problem arises once you have many slow tests.
 
 You need to constantly keep an eye open for tests that take longer than others. Not just the very slow ones (you have already tackled those, right?), but the whole category of slow tests. Create a culture where team members always try to move UI-level tests to Integration-level. Integration-level Tests to Unit-level. And keep an eye open for faster alternatives.
-
-
-Stuff to work on:
------------------
-
-* commonize the start/end of HTTP server
